@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Services\InternetServiceProvider\InternetServiceProviderInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,7 +18,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(
             InternetServiceProviderInterface::class,
-            'App\Services\InternetServiceProvider\\'.ucfirst(Request::capture()->segment(2))
+            'App\Services\InternetServiceProvider\\' . ucfirst(Request::capture()->segment(2))
         );
     }
 
@@ -28,6 +29,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        JsonResource::withoutWrapping();
     }
 }
