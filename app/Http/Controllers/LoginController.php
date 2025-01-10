@@ -21,7 +21,12 @@ class LoginController extends Controller
                 throw new AuthenticationException('Invalid credentials');
             }
 
-            return LoginResource::make($user);
+            // return LoginResource::make($user);
+            // Return success response with LoginResource
+            return response()->json([
+                'status' => Response::HTTP_OK,
+                'data'   => new LoginResource($user),
+            ], Response::HTTP_OK);
         } catch (AuthenticationException $e) {
             return response()->json([
                 'status'  => Response::HTTP_UNAUTHORIZED,
