@@ -80,11 +80,13 @@ class PostController extends Controller
         //     }
 
 
+
         try {
+
             // Fetch post with conditional likes for the authenticated user
             $post = Post::query()
                 ->with([
-                    'likes' => function ($query) {
+                    'likes' => function (HasMany $query) {
                         $query->whereBelongsTo(Auth::user());
                     },
                 ])
